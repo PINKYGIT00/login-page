@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & OTP Verification</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script type="text/javascript" 
+    src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+
+    </script>
+</head>
+<body>
+    <!-- Login Page -->
+    <div class="login-container" id="login-container">
+        <h2>LOGIN</h2>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="remember-me">
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember me?</label>
+            </div>
+            <button type="button" class="login-btn" id="login-btn">LOGIN</button>
+        </form>
+        <p class="forgot-password">Forgot Password?</p>
+        <div class="social-login">
+            <a href="#" class="google"><i class="fab fa-google"></i></a>
+            <a href="#" class="facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="linkedin"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+        <p class="signup-link">Need an account? <a href="signup.html">SIGN UP</a></p>
+    </div>
+
+    <!-- OTP Verification Page -->
+    <div class="container" id="otp-container" style="display: none;">
+        <h2>Verify Email</h2>
+        <p>Please enter the OTP sent to your email.</p>
+        <input type="text" id="otp-input" placeholder="Enter OTP" required>
+        <button id="verify-btn">VERIFY OTP →</button>
+        <p class="resend">Didn't receive a code? <a href="#" id="resend-link">Resend</a></p>
+    </div>
+
+    <!-- Congratulations Page -->
+    <div class="container success-screen" id="success-screen" style="display: none;">
+        <h2>✅ Success!!!</h2>
+        <p>Your email has been successfully verified.</p>
+        <button onclick="window.location.href = 'home.html'">CONTINUE →</button>
+    </div>
+
+    <script>
+        // Initialize EmailJS
+        emailjs.init("-RACyK29yK0hY1ndB");  // Replace with your EmailJS public key
+
+        let generatedOTP = "";
+
+        // Function to generate a 4w-digit OTP
+        function generateOTP() {
+            return Math.floor(1000 + Math.random() * 9000).toString();
+        }
+
+        // Function to send OTP email using EmailJS
+        function sendOTP(email) {
+            generatedOTP = generateOTP();  // Generate a new OTP
+
+            let templateParams = {
+                to_email: email,
+                otp: generatedOTP
+            };
+
+            emailjs.send("service_f8ir8xz", "template_ezcx50e", templateParams) // Replace with your EmailJS details
+                .then(function(response) {
+                    console.log("OTP sent successfully!", response);
+                    alert("OTP sent to " + email);
+                }, function(error) {
+                    console.error("Error sending OTP:", error);
+                    alert("Failed to send OTP. Please try again.");
+                });
+        }
+
+        // Handle login button click
+        document.getElementById("login-btn").addEventListener("click", function() {
+            let email = document.getElementById("email").value;
+
+            if (email) {
+                sendOTP(email);
+                document.getElementById("login-container").style.display = "none";
+                document.getElementById("otp-container").style.display = "block";
+            } else {
+                alert("Please enter a valid email.");
+            }
+        });
+
+        // Handle OTP verification
+        document.getElementById("verify-btn").addEventListener("click", function() {
+            let enteredOTP = document.getElementById("otp-input").value;
+
+            if (enteredOTP === generatedOTP) {
+                document.getElementById("otp-container").style.display = "none";
+                document.getElementById("success-screen").style.display = "block";
+            } else {
+                alert("Invalid OTP. Please try again.");
+            }
+        });
+
+        // Resend OTP functionality
+        document.getElementById("resend-link").addEventListener("click", function() {
+            let email = document.getElementById("email").value;
+            if (email) {
+                sendOTP(email);
+            } else {
+                alert("Invalid email. Try logging in again.");
+            }
+        });
+    </script>
+</body>
+</html>

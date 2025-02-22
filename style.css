@@ -1,0 +1,127 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #6C98C6;
+}
+.login-container {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    text-align: center;
+}
+.login-container h2 {
+    margin-bottom: 20px;
+}
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+.input-group label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 20px;  
+    font-size: 14px; 
+    cursor: pointer; 
+}
+
+.remember-me input {
+    width: 16px; 
+    height: 16px;
+    cursor: pointer;
+}
+
+
+.login-btn {
+    background: #E94E77;
+    color: white;
+    padding: 10px;
+    border: none;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px; 
+    font-size: 16px;
+}
+.forgot-password {
+    margin: 10px 0;
+    font-size: 14px;
+}
+.social-login {
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+}
+.social-login a {
+    margin: 0 10px;
+    font-size: 24px;
+    text-decoration: none;
+    color: inherit;
+}
+.social-login .google { color: red; }
+.social-login .facebook { color: blue; }
+.social-login .linkedin { color: navy; }
+.signup-link {
+    font-size: 14px;
+}
+.container{
+    background: white;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    text-align: center;
+}
+input[type="text"] {
+    width: 80%;
+    padding: 12px;
+    font-size: 16px;
+    margin-bottom: 15px; 
+    border: 2px solid #8a2be2; 
+    border-radius: 6px;
+    text-align: center;
+    outline: none;
+}
+
+button {
+    width: 85%;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #8a2be2; 
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top:20px;
+}
+
+button:hover {
+    background-color: #6a1bb5; 
+}
+
+.resend {
+    margin-top: 10px; 
+}
+
